@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\DrugEntryController;
 use App\Http\Controllers\PatientController;
-use App\Http\Controllers\UserCotroller;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 
 Route::get('/', function () {
@@ -18,10 +18,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::prefix('patient')->group(function () {
-    Route::get('/', [PatientController::class, 'index'])->name('patient.index');
+    Route::get('/', [PatientController::class, 'index'])->name('patient');
+    Route::get('/create', [PatientController::class, 'create'])->name('patients.create');
+    Route::post('/store', [PatientController::class, 'store'])->name('patients.store');
 });
 Route::prefix('drugentry')->group(function () {
-    Route::get('/', [DrugEntryController::class, 'index'])->name('drugentry.index');
+    Route::get('/', [DrugEntryController::class, 'index'])->name('drugentry');
 });
 Route::prefix('drug')->group(function () {
     Route::get('/', [DrugController::class, 'index'])->name('drug.index');
@@ -30,5 +32,5 @@ Route::prefix('visit')->group(function () {
     Route::get('/', [VisitController::class, 'index'])->name('visit.index');
 });
 Route::prefix('user')->group(function () {
-    Route::get('/', [UserCotroller::class, 'index'])->name('user.index');
+    Route::get('/', [UserController::class, 'index'])->name('user.index');
 });

@@ -64,22 +64,22 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item active">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
+              <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
               </a>
             </li>
             <!-- Pasien -->            
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link">
+            <li class="menu-item {{ Route::currentRouteName() == 'patient' ? 'active' : '' }}">
+              <a href="{{ route('patient') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Pasien</div>
               </a>
             </li>
             <!-- Obat Masuk -->            
-            <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
+            <li class="menu-item{{ Route::currentRouteName() == 'druentry' ? 'active' : '' }}">
+              <a href="{{ route('drugentry') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Obat Masuk</div>
               </a>

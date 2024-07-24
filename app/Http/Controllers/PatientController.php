@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -19,7 +20,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        //
+        return view('patients.create');
     }
 
     /**
@@ -27,7 +28,23 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name'    => 'required|max:255',
+            'birth' => 'required',
+            'sex'     => 'required',
+            'phone'   => 'required',
+            'massage' => 'required',
+        ]);
+
+        $patient = new Patient();
+        $patient->name = $request->name;
+        $patient->birth = $request->birth;
+        $patient->sex = $request->sex;
+        $patient->phone = $request->phone;
+        $patient->address = $request->massage;
+        $patient->save();
+
+        return redirect('/patient');
     }
 
     /**
