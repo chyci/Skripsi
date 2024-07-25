@@ -12,7 +12,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return view('patients.index');
+        $patients = Patient::paginate(15);
+        return view('patients.index', compact('patients'));
     }
 
     /**
@@ -33,7 +34,7 @@ class PatientController extends Controller
             'birth' => 'required',
             'sex'     => 'required',
             'phone'   => 'required',
-            'massage' => 'required',
+            'address' => 'required',
         ]);
 
         $patient = new Patient();
@@ -41,7 +42,7 @@ class PatientController extends Controller
         $patient->birth = $request->birth;
         $patient->sex = $request->sex;
         $patient->phone = $request->phone;
-        $patient->address = $request->massage;
+        $patient->address = $request->address;
         $patient->save();
 
         return redirect('/patient');
@@ -60,7 +61,8 @@ class PatientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $patient = Patient::find($id);
+        return view('patients.edit', compact('patient'));
     }
 
     /**
@@ -68,7 +70,23 @@ class PatientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name'    => 'required|max:255',
+            'birth' => 'required',
+            'sex'     => 'required',
+            'phone'   => 'required',
+            'address' => 'required',
+        ]);
+
+        $patient = Patient::find($id);
+        $patient->name = $request->name;
+        $patient->birth = $request->birth;
+        $patient->sex = $request->sex;
+        $patient->phone = $request->phone;
+        $patient->address = $request->address;
+        $patient->save();
+
+        return redirect('/patient');
     }
 
     /**
@@ -76,6 +94,8 @@ class PatientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $patient = Patient::find($id);
+        $patient->delete();
+        return redirect('/patient');
     }
 }

@@ -21,6 +21,9 @@ Route::prefix('patient')->group(function () {
     Route::get('/', [PatientController::class, 'index'])->name('patient');
     Route::get('/create', [PatientController::class, 'create'])->name('patients.create');
     Route::post('/store', [PatientController::class, 'store'])->name('patients.store');
+    Route::get('/edit/{id}', [PatientController::class, 'edit'])->name('patients.edit');
+    Route::put('/update/{id}', [PatientController::class, 'update'])->name('patients.update');
+    Route::get('/destroy/{id}', [PatientController::class, 'destroy'])->name('patients.destroy');
 });
 Route::prefix('drugentry')->group(function () {
     Route::get('/', [DrugEntryController::class, 'index'])->name('drugentry');
