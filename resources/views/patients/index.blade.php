@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-  <div class="mb-2">
-    <a href="{{route('patients.create')}}" type="button" class="btn rounded-pill btn-outline-primary btn-primary">Tambah Pasien</a>
-  </div>
 <div class="card">
-    <h5 class="card-header">Pasien</h5>
-    <div class="table-responsive text-nowrap">
+  <div class="table-responsive text-nowrap">
+   <div class="mb-2 d-flex justify-content-between align-items-center py-2">
+        <h5 class="card-header mb-0">Pasien</h5>
+        <a href="{{route('patients.create')}}" type="button " class="btn mx-3 rounded-pill btn-primary">Tambah Pasien</a>
+      </div>  
       <table class="table table-hover">
         <thead>
           <tr>
