@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drug;
+use App\Models\DrugEntry;
 use Illuminate\Http\Request;
 
 class DrugController extends Controller
@@ -11,7 +13,8 @@ class DrugController extends Controller
      */
     public function index()
     {
-        return view('drug.index');
+        $drugs = Drug::paginate(15);
+        return view('drug.index', compact('drugs'));
     }
 
     /**
@@ -19,7 +22,7 @@ class DrugController extends Controller
      */
     public function create()
     {
-        //
+        return view('drug.create');
     }
 
     /**
@@ -27,7 +30,15 @@ class DrugController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name'    => 'required|max:255',
+        ]);
+
+        $drug = new Drug();
+        $drug->name = $request->name;
+        $drug->save();
+
+        return redirect('/drug');
     }
 
     /**
@@ -43,7 +54,8 @@ class DrugController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $drug = Drug::find($id);
+        return view('drug.edit', compact('drug'));
     }
 
     /**
@@ -51,7 +63,15 @@ class DrugController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name'    => 'required|max:255',
+        ]);
+
+        $drug = Drug::find($id);
+        $drug->name = $request->name;
+        $drug->save();
+
+        return redirect('/drug');
     }
 
     /**
@@ -59,6 +79,8 @@ class DrugController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $drug = Drug::find($id);
+        $drug->delete();
+        return redirect('/drug');
     }
 }

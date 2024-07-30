@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drug;
+use App\Models\DrugEntry;
 use Illuminate\Http\Request;
 
 class DrugEntryController extends Controller
@@ -11,7 +13,8 @@ class DrugEntryController extends Controller
      */
     public function index()
     {
-        return view('drugentry.index');
+        $drugentry = DrugEntry::with('drug')->paginate(15);
+        return view('drugentry.index', compact('drugentry'));
     }
 
     /**
@@ -19,7 +22,8 @@ class DrugEntryController extends Controller
      */
     public function create()
     {
-        //
+        $drug = Drug::get(); 
+        return view('drugentry.create', compact('drug'));
     }
 
     /**
@@ -27,7 +31,19 @@ class DrugEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'drug_id'    => 'required|integer|exists:drugs,id',
+            'quantity'   => 'required|integer',
+            'entry_date' => 'required',
+        ]);
+
+        $drugentry = new DrugEntry();
+        $drugentry->drug_id = $request->drug_id;
+        $drugentry->quantity = $request->quantity;
+        $drugentry->entry_date = $request->entry_date;
+        $drugentry->save();
+
+        return redirect('/drugentry');
     }
 
     /**
@@ -43,15 +59,29 @@ class DrugEntryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $drug = Drug::get(); 
+        $drugentry = DrugEntry::find($id);
+        return view('drugentry.edit', compact('drugentry','drug'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $validated = $request->validate([
+            'drug_id'    => 'required|integer|exists:drugs,id',
+            'quantity'   => 'required|integer',
+            'entry_date' => 'required',
+        ]);
+
+        $drugentry = DrugEntry::find($id);
+        $drugentry->drug_id = $request->drug_id;
+        $drugentry->quantity = $request->quantity;
+        $drugentry->entry_date = $request->entry_date;
+        $drugentry->save();
+
+        return redirect('/drugentry');
     }
 
     /**
@@ -59,6 +89,8 @@ class DrugEntryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $drugentry = DrugEntry::find($id);
+        $drugentry->delete();
+        return redirect('/drugentry');
     }
 }

@@ -6,17 +6,17 @@
 <div class="col-xxl">
     <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="mb-0">Pasien</h5>
+        <h5 class="mb-0">Drug</h5>
         <small class="text-muted float-end">Default label</small>
     </div>
     <div class="card-body">
-        <form action="{{route('patients.update',$patient->id)}}" method="POST">
+        <form action="{{route('drug.update',$drug->id)}}" method="POST">
             @csrf
             @method("PUT")
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-default-name">Name</label>
             <div class="col-sm-10">
-            <input type="text" id="basic-default-name" value="{{$patient->name}}" name="name"
+            <input type="text" id="basic-default-name" value="{{$drug->name}}" name="name"
                 class="form-control @error('name') invalid @enderror">
                 @error('name')
                 <div class="form-text text-danger">{{ $message }}</div>

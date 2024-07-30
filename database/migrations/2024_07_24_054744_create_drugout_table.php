@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('drugout', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('drug_id');
+            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade')->onDelete('restrict');
             $table->integer('quantity');
             $table->timestamps();
         });

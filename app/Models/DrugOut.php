@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DrugEntry extends Model
+class DrugOut extends Model
 {
     use HasFactory;
-    protected $table= 'drugentry';
-    protected $fillable= ['drug_id','quantity','entry_date'];
+    protected $fillabel = ['drug_id', 'quantity'];
 
     /**
      * Get the drug that owns the DrugEntry

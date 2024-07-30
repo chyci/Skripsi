@@ -7,6 +7,7 @@ use App\Http\Controllers\DrugEntryController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,9 +28,19 @@ Route::prefix('patient')->group(function () {
 });
 Route::prefix('drugentry')->group(function () {
     Route::get('/', [DrugEntryController::class, 'index'])->name('drugentry');
+    Route::get('/create', [DrugEntryController::class, 'create'])->name('drugentry.create');
+    Route::post('/store', [DrugEntryController::class, 'store'])->name('drugentry.store');
+    Route::get('/edit/{id}', [DrugEntryController::class, 'edit'])->name('drugentry.edit');
+    Route::put('/update/{id}', [DrugEntryController::class, 'update'])->name('drugentry.update');
+    Route::get('/destroy/{id}', [DrugEntryController::class, 'destroy'])->name('drugentry.destroy');
 });
 Route::prefix('drug')->group(function () {
-    Route::get('/', [DrugController::class, 'index'])->name('drug.index');
+    Route::get('/', [DrugController::class, 'index'])->name('drug');
+    Route::get('/create', [DrugController::class, 'create'])->name('drug.create');
+    Route::post('/store', [DrugController::class, 'store'])->name('drug.store');
+    Route::get('/edit/{id}', [DrugController::class, 'edit'])->name('drug.edit');
+    Route::put('/update/{id}', [DrugController::class, 'update'])->name('drug.update');
+    Route::get('/destroy/{id}', [DrugController::class, 'destroy'])->name('drug.destroy');
 });
 Route::prefix('visit')->group(function () {
     Route::get('/', [VisitController::class, 'index'])->name('visit.index');

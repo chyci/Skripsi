@@ -34,9 +34,16 @@
     <link rel="stylesheet" href="{{ asset('/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('/css/demo.css')}}" />
 
+    <script src="{{ asset('/js/jquery-3.7.1.js')}}"></script>
+
     <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{ asset('/css/dataTables.bootstrap5.css')}}" />
     <link rel="stylesheet" href="{{ asset('/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{ asset('/vendor/libs/apex-charts/apex-charts.css')}}" />
+    {{-- <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css')}}" /> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />
+    
+    @stack('css')
 
     <!-- Page CSS -->
 
@@ -77,10 +84,13 @@
     </div>
     <!-- / Layout wrapper -->
 
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-
-    <script src="{{ asset('/vendor/libs/jquery/jquery.js')}}"></script>
+    <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+    {{-- <script src="{{ asset('/vendor/libs/jquery/jquery.js')}}"></script> --}}
+    <script scr="{{asset('/js/dataTables.js')}}"></script>
+    <script scr="{{asset('/js/dataTables.bootstrap5.js')}}"></script>
     <script src="{{ asset('/vendor/libs/popper/popper.js')}}"></script>
     <script src="{{ asset('/vendor/js/bootstrap.js')}}"></script>
     <script src="{{ asset('/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
@@ -99,5 +109,6 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    @stack('js')
   </body>
 </html>
