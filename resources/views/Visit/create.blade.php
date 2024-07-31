@@ -54,7 +54,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Asam Urat</label>
                                 <div class="col-sm-10">
-                                    <input type="number" id="basic-default-name" placeholder="Asam Urat saat diperiksa" name="urid_acid"
+                                    <input type="number" id="basic-default-name" placeholder="Asam Urat saat diperiksa" name="uric_acid"
                                         class="form-control @error('quantity') invalid @enderror">
                                     @error('quantity')
                                         <div class="form-text text-danger">{{ $message }}</div>
@@ -84,7 +84,7 @@
                             <div id="obat-fields">
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-sm-5">
-                                        <select class="select2 form-select" name="drug_id">
+                                        <select class="select2 form-select" name="drug_id[]">
                                             <option value="">Pilih Obat</option>
                                             @foreach ($drugs as $drug)
                                             <option class="@error('drug_id') invalid @enderror" value="{{$drug->id}}">{{$drug->name}}</option>
@@ -92,7 +92,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" name="quantity" placeholder="Dosis Obat">
+                                        <input type="number" class="form-control" name="quantity[]" placeholder="Dosis Obat">
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-danger remove-obat">Hapus</button>

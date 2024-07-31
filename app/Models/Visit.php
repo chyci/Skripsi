@@ -9,4 +9,14 @@ class Visit extends Model
 {
     use HasFactory;
     protected $fillable = ['blood_pressure', 'uric_acid','fasting_glucose', 'diagnose', 'date'];
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
+
+    public function drugOuts()
+    {
+        return $this->hasMany(DrugOut::class);
+    }
 }
