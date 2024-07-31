@@ -37,9 +37,7 @@ class VisitController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'patient_id'    => 'required|integer|exists:patients,id',
-            'drug_id'    => 'required|integer|exists:drugs,id',
-            'quantity'   => 'required|integer',
+            'patient_id'    => 'required|exists:patients,id',
             'blood_pressure' => 'required',
             'fasting_glucose' => 'required',
             'uric_acid' => 'required',
@@ -56,10 +54,11 @@ class VisitController extends Controller
         $visit->date = $request->date;
         $visit->save();
 
-        foreach ($request->drug as $drug) {
+        foreach ($request->drug_id as $index => $drug) {
             $drugout = new DrugOut();
             $drugout->drug_id = $drug;
-            $drugout->quantity = $request->quantity[$drug];
+            $drugout->visit_id = $visit->id;
+            $drugout->quantity = $request->quantity[$index];
             $drugout->save();
         }
 

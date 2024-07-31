@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('fasting_glucose');
             $table->text('diagnose');
             $table->date('date');
-            $table->unsignedBigInteger('drug_id');
-            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade')->onDelete('restrict');
+            // $table->unsignedBigInteger('drug_id');
+            // $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
             
         });
