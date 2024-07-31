@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class DrugOut extends Model
 {
     use HasFactory;
+    protected $table = 'drugout';
     protected $fillabel = ['drug_id', 'quantity'];
 
     /**

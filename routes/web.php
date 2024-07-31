@@ -7,6 +7,7 @@ use App\Http\Controllers\DrugEntryController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -44,6 +45,11 @@ Route::prefix('drug')->group(function () {
 });
 Route::prefix('visit')->group(function () {
     Route::get('/', [VisitController::class, 'index'])->name('visit.index');
+    Route::get('/create', [VisitController::class, 'create'])->name('visit.create');
+    Route::post('/store', [VisitController::class, 'store'])->name('visit.store');
+    Route::get('/edit/{id}', [VisitController::class, 'edit'])->name('visit.edit');
+    Route::put('/update/{id}', [VisitController::class, 'update'])->name('visit.update');
+    Route::get('/destroy/{id}', [VisitController::class, 'destroy'])->name('visit.destroy');
 });
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.index');

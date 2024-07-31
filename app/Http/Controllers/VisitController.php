@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drug;
+use App\Models\DrugOut;
+use App\Models\Patient;
+use App\Models\Visit;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class VisitController extends Controller
@@ -11,7 +16,8 @@ class VisitController extends Controller
      */
     public function index()
     {
-        return view('visit.index');
+        $visit = Visit::with('patient')->paginate(15);
+        return view('visit.index', compact('visit'));
     }
 
     /**
@@ -19,7 +25,10 @@ class VisitController extends Controller
      */
     public function create()
     {
-        //
+        $patient = Patient::get();
+        $drugs = Drug::get();
+        $drugout = DrugOut::get();
+        return view('visit.create', compact('drugout', 'patient', 'drugs'));
     }
 
     /**
@@ -27,7 +36,34 @@ class VisitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'patient_id'    => 'required|integer|exists:patients,id',
+            'drug_id'    => 'required|integer|exists:drugs,id',
+            'quantity'   => 'required|integer',
+            'blood_pressure' => 'required',
+            'fasting_glucose' => 'required',
+            'uric_acid' => 'required',
+            'diagnose' => 'required',
+            'date' => 'required',
+        ]);
+
+        $visit = new Visit();
+        $visit->patient_id = $request->patient_id;
+        $visit->blood_pressure = $request->blood_pressure;
+        $visit->uric_acid = $request->uric_acid;
+        $visit->fasting_glucose = $request->fasting_glucose;
+        $visit->diagnose = $request->diagnose;
+        $visit->date = $request->date;
+        $visit->save();
+
+        foreach ($request->drug as $drug) {
+            $drugout = new DrugOut();
+            $drugout->drug_id = $drug;
+            $drugout->quantity = $request->quantity[$drug];
+            $drugout->save();
+        }
+
+        return redirect('/visit');
     }
 
     /**
