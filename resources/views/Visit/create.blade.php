@@ -97,9 +97,9 @@
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-danger remove-obat">Hapus</button>
                                     </div>
-                                            @error('drug_id')
-                                                <div class="form-text text-danger">{{ $message }}</div>
-                                            @enderror
+                                    @error('drug_id')
+                                        <div class="form-text text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary" id="add-obat">Tambah Obat</button>
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         newObatField.classList.add('row', 'mb-2', 'align-items-center');
         newObatField.innerHTML = `
             <div class="col-sm-5">
-                <select class="select2 form-select" name="drug[]">
+                <select class="select2 form-select" name="drug_id[]">
                     <option value="">Pilih Obat</option>
                     @foreach ($drugs as $drug)
                     <option value="{{$drug->id}}">{{$drug->name}}</option>

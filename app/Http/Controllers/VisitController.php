@@ -8,6 +8,7 @@ use App\Models\Patient;
 use App\Models\Visit;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VisitController extends Controller
 {
@@ -45,6 +46,8 @@ class VisitController extends Controller
             'date' => 'required',
         ]);
 
+        DB::beginTransaction();
+
         $visit = new Visit();
         $visit->patient_id = $request->patient_id;
         $visit->blood_pressure = $request->blood_pressure;
@@ -62,6 +65,8 @@ class VisitController extends Controller
             $drugout->save();
         }
 
+        DB::commit();
+
         return redirect('/visit');
     }
 
@@ -78,7 +83,13 @@ class VisitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $visit = Visit::find($id);
+        $patient = Patient::get();
+        $drugs = Drug::get();
+        // $drugout = DrugOut::get();
+
+        $drugouts = DrugOut::where('visit_id', $id)->get();
+        return view('visit.edit', compact('drugouts', 'drugs', 'patient', 'visit'));
     }
 
     /**
@@ -86,7 +97,37 @@ class VisitController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'patient_id'    => 'required|exists:patients,id',
+            'blood_pressure' => 'required',
+            'fasting_glucose' => 'required',
+            'uric_acid' => 'required',
+            'diagnose' => 'required',
+            'date' => 'required',
+            'drug_id' => 'required',
+            'quantity' => 'required',
+        ]);
+
+        $visit = Visit::find($id);
+        $visit->patient_id = $request->patient_id;
+        $visit->blood_pressure = $request->blood_pressure;
+        $visit->uric_acid = $request->uric_acid;
+        $visit->fasting_glucose = $request->fasting_glucose;
+        $visit->diagnose = $request->diagnose;
+        $visit->date = $request->date;
+        $visit->save();
+
+        // delete all drugout by visit id
+        DrugOut::where('visit_id', $id)->delete();
+        foreach ($request->drug_id as $index => $drug) {
+            $drugout = new DrugOut();
+            $drugout->drug_id = $drug;
+            $drugout->visit_id = $visit->id;
+            $drugout->quantity = $request->quantity[$index];
+            $drugout->save();
+        }
+
+        return redirect('/visit');
     }
 
     /**

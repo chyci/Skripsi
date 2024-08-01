@@ -73,57 +73,50 @@
             <!-- Pasien -->            
             <li class="menu-item {{ Route::currentRouteName() == 'patient' ? 'active' : '' }}">
               <a href="{{ route('patient') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Pasien</div>
-              </a>
-            </li>
-            <!-- Obat Masuk -->            
-            <li class="menu-item {{ Route::currentRouteName() == 'drugentry' ? 'active' : '' }}">
-              <a href="{{ route('drugentry') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Obat Masuk</div>
-              </a>
-            </li>
-            <!-- Obat -->            
-            <li class="menu-item {{Route::currentRouteName() == 'drug' ? 'active' : ''}}">
-              <a href="{{route('drug')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Obat</div>
+                <i class="menu-icon tf-icons bx bx-group"></i>
+                <div data-i18n="Pasien">Pasien</div>
               </a>
             </li>
             <!-- Kunjungan -->            
             <li class="menu-item">
               <a href="{{route('visit.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Kunjungan</div>
+                <div data-i18n="Kunjungan">Kunjungan</div>
               </a>
             </li>
-            <!-- Stok Obat -->            
-            <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
+            <!-- Obat -->            
+            <li class="menu-item {{Route::currentRouteName() == 'drug' ? 'active' : ''}}">
+              <a href="{{route('drug')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Stok Obat</div>
+                <div data-i18n="Obat">Obat</div>
+              </a>
+            </li>
+            <!-- Obat Masuk -->            
+            <li class="menu-item {{ Route::currentRouteName() == 'drugentry' ? 'active' : '' }}">
+              <a href="{{ route('drugentry') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Obat Masuk">Obat Masuk</div>
               </a>
             </li>
             <!-- riwayat pasien -->            
             <li class="menu-item">
               <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">riwayat pasien</div>
+                <div data-i18n="riwayat pasien">riwayat pasien</div>
               </a>
             </li>
             <!-- Kelola Akun -->            
             <li class="menu-item">
               <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Kelola Akun</div>
+                <div data-i18n="kelola akun">Kelola Akun</div>
               </a>
             </li>
             <!-- User -->            
             <li class="menu-item">
               <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">User</div>
+                <div data-i18n="user">User</div>
               </a>
             </li>
 

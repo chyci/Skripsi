@@ -28,10 +28,10 @@
               </span>
             </td>
             <td class="text-center">
-              {{$visit->visit_date}}
+              {{$visit->date}}
             </td>
             <td class="text-center">
-              {{$visit->diagnosis}}
+              {{$visit->diagnose}}
             </td>
             <td>
               <div class="dropdown">
