@@ -75,7 +75,14 @@ class VisitController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $visit = Visit::find($id);
+        $patient = Patient::get();
+        $drugs = Drug::get();
+        // $drugout = DrugOut::get();
+
+        $drugouts = DrugOut::where('visit_id', $id)->get();
+        return view('visit.show', compact('drugouts', 'drugs', 'patient', 'visit'));
+        return redirect('/visit');
     }
 
     /**
@@ -135,6 +142,12 @@ class VisitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $visit = Visit::find($id);
+        $drugouts = DrugOut::where('visit_id', $id)->get();
+        foreach ($drugouts as $drugout) {
+            $drugout->delete();
+        }
+        $visit->delete();
+        return redirect('/visit');
     }
 }

@@ -84,7 +84,7 @@
                             <div id="obat-fields">
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-sm-5">
-                                        <select class="select2 form-select" name="drug_id[]">
+                                        <select class="select2 form-select" name="drug_id[]" required>
                                             <option value="">Pilih Obat</option>
                                             @foreach ($drugs as $drug)
                                             <option class="@error('drug_id') invalid @enderror" value="{{$drug->id}}">{{$drug->name}}</option>
@@ -92,14 +92,11 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" name="quantity[]" placeholder="Dosis Obat">
+                                        <input type="number" class="form-control" name="quantity[]" placeholder="Dosis Obat" required>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-danger remove-obat">Hapus</button>
                                     </div>
-                                    @error('drug_id')
-                                        <div class="form-text text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary" id="add-obat">Tambah Obat</button>

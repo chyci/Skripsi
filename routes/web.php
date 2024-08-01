@@ -49,6 +49,7 @@ Route::prefix('visit')->group(function () {
     Route::post('/store', [VisitController::class, 'store'])->name('visit.store');
     Route::get('/edit/{id}', [VisitController::class, 'edit'])->name('visit.edit');
     Route::put('/update/{id}', [VisitController::class, 'update'])->name('visit.update');
+    Route::get('/show/{id}', [VisitController::class, 'show'])->name('visit.show');
     Route::get('/destroy/{id}', [VisitController::class, 'destroy'])->name('visit.destroy');
 });
 Route::prefix('user')->group(function () {
