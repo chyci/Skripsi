@@ -15,6 +15,7 @@
           <tr>
             <th class="text-center">No</th>
             <th>Nama</th>
+            <th class="text-center">Jumlah Stok</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -30,6 +31,8 @@
             <td>
               {{$drug->name}}
             </td>
+            <td class="text-center">
+              {{ $drug->net_quantity }}
             </td>
             <td>
               <div class="dropdown">
