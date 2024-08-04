@@ -45,15 +45,10 @@
               @endif
             </td>
             <td>
-              <div class="dropdown">
-                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                  <i class="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{{--{{route('patients.edit', $patient->id)}}--}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                  <a class="dropdown-item" href="{{route('user.destroy',$user->id)}}"><i class="bx bx-trash me-1"></i> Delete</a>
-                </div>
-              </div>
+              <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#changeRoleModal" data-userid="{{$user->id}}">
+                Change Role
+              </button>
+              <button type="button" class="btn btn-sm btn-danger">Delete</button>
             </td>
           </tr>
           @endforeach
@@ -63,13 +58,49 @@
   </div>
 
 </div>
+
+
+{{-- Modal --}}
+<div class="modal fade" id="changeRoleModal" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <form class="modal-content" method="POST">
+      @csrf
+      @method('PUT')
+      <div class="modal-header">
+        <h5 class="modal-title" id="changeRoleModalTitle">Confirm Role Change</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-center text-bold">Are you sure you want to change role?</h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-warning">Change Role</button>
+      </div>
+    </form>
+  </div>
+</div>
+{{-- End Modal --}}
     
+@endsection
+
+@section('js')
+  <script src="{{ asset('/js/ui-modals.js') }}"></script>
 @endsection
 
 @push('js')
     <script type="text/javascript">
       $(document).ready( function () {
-          $('#myTable').DataTable();
-      } );
+        $('#myTable').DataTable();
+      });
+
+      $('#changeRoleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('userid')
+        var modal = $(this)
+        modal.find('form').attr('action', '/user/change-role/' + id);
+      });
     </script>
 @endpush

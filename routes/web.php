@@ -59,6 +59,8 @@ Route::prefix('user')->group(function () {
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/change-password/{id}', [UserController::class, 'changePassword'])->name('user.change-password');
     Route::get('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+    Route::put('/change-role/{id}', [UserController::class, 'changeRole'])->name('user.change-role')->middleware(UserRole::class);
 });
 Route::prefix('patienthistory')->group(function () {
     Route::get('/', [PatientHistoryController::class, 'index'])->name('patienthistory.index');

@@ -70,6 +70,20 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Password berhasil diubah.');
     }
 
+    public function changeRole(string $id)
+    {
+        $users = User::find($id);
+        if ($users->role == 'admin') {
+            $users->role = 'staff';
+        } else {
+            $users->role = 'admin';
+        }
+        $users->save();
+
+        // return plus session flash
+        return redirect()->back()->with('success', 'Role berhasil diubah.');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
