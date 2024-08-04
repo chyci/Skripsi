@@ -112,13 +112,15 @@
                 <div data-i18n="kelola akun">Kelola Akun</div>
               </a>
             </li>
-            <!-- User -->            
-            <li class="menu-item {{Route::currentRouteName() == 'user.index' ? 'active' : ''}}">
-              <a href="{{route('user.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="user">User</div>
-              </a>
-            </li>
+            <!-- User -->  
+            @if (Auth::user()->role === 'admin')
+                <li class="menu-item {{Route::currentRouteName() == 'user.index' ? 'active' : ''}}">
+                  <a href="{{route('user.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                    <div data-i18n="user">User</div>
+                  </a>
+                </li>
+            @endif
 
           </ul>
         </aside>

@@ -8,6 +8,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientHistoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
+use App\Http\Middleware\UserRole;
 use App\Models\Visit;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,7 +54,7 @@ Route::prefix('visit')->group(function () {
     Route::get('/show/{id}', [VisitController::class, 'show'])->name('visit.show');
     Route::get('/destroy/{id}', [VisitController::class, 'destroy'])->name('visit.destroy');
 });
-Route::prefix('user')->group(function () {
+Route::prefix('user')->middleware(UserRole::class)->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.index');
 });
 Route::prefix('patienthistory')->group(function () {
