@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(15);
+        $users = User::where('id', '!=', auth()->user()->id)->get();
         return view('user.index', compact('users'));
     }
 
@@ -91,6 +91,6 @@ class UserController extends Controller
     {
         $users = User::find($id);
         $users->delete();
-        return redirect('/user');
+        return redirect()->back()->with('success', 'User berhasil dihapus.');
     }
 }
