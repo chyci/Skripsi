@@ -54,8 +54,11 @@ Route::prefix('visit')->group(function () {
     Route::get('/show/{id}', [VisitController::class, 'show'])->name('visit.show');
     Route::get('/destroy/{id}', [VisitController::class, 'destroy'])->name('visit.destroy');
 });
-Route::prefix('user')->middleware(UserRole::class)->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('user.index');
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('user.index')->middleware(UserRole::class);
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/change-password/{id}', [UserController::class, 'changePassword'])->name('user.change-password');
+    Route::get('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 Route::prefix('patienthistory')->group(function () {
     Route::get('/', [PatientHistoryController::class, 'index'])->name('patienthistory.index');

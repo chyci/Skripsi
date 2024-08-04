@@ -3,6 +3,15 @@
 @section('content')
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ route('dashboard')}}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ route('patienthistory')}}">Riwayat Pasien</a>
+        </li>
+        <li class="breadcrumb-item active">{{$patients->first()->name}}</li>
+    </ol>
     <div class="card mb-2">
         <div class="d-flex align-items-end row">
             <div class="col-sm-7">

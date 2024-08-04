@@ -3,6 +3,15 @@
 @section('content')
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+    <a href="{{route('dashboard')}}">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+    <a href="{{route('drug')}}">Drug</a>
+    </li>
+    <li class="breadcrumb-item active">Create</li>
+</ol>
 <div class="col-xxl">
     <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">

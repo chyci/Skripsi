@@ -3,6 +3,15 @@
 @section('content')
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ route('dashboard')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ route('drugentry')}}">Drug Entry</a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ol>
         <div class="col-xxl">
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
@@ -22,7 +31,9 @@
                                             data-allow-clear="true" data-select2-id="multicol-country" tabindex="-1"
                                             aria-hidden="true" name="drug_id">
                                             @foreach ($drug as $item)
-                                                <option value="{{ $item->id }}" data-select2-id="2" {{ $item->id == $drugentry->drug_id ? "selected" : "" }}>{{ $item->name }}
+                                                <option value="{{ $item->id }}" data-select2-id="2"
+                                                    {{ $item->id == $drugentry->drug_id ? 'selected' : '' }}>
+                                                    {{ $item->name }}
                                                 </option>
                                             @endforeach
 

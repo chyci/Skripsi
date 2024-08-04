@@ -2,12 +2,18 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{route('dashboard')}}">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">User</li>
+    </ol>
+  </nav>
 <div class="card">
   <div class="px-4 table-responsive text-nowrap">
   <div class="mb-2 d-flex justify-content-between align-items-center py-2">
-    <h5 class="card-header">Pasien</h5>
-    <a href="{{route('patients.create')}}" type="button" class="btn rounded-pill mx-3 btn-primary">
-      <span class="tf-icons bx bx-plus bx-18px me-2"></span>Tambah User</a>
+    <h5 class="card-header">User</h5>
       </div> 
       <table id="myTable" class="table table-hover">
         <thead>
@@ -31,7 +37,13 @@
             <td>
               {{$user->role}}
             </td>
-            <td>{{$user->status}}</td>
+            <td>
+              @if ($user->status == '1')
+                  <span class="badge rounded-pill bg-label-success">Active</span>
+              @elseif ($user->status == '0')
+                  <span class="badge rounded-pill bg-label-warning">Inactive</span>
+              @endif
+            </td>
             <td>
               <div class="dropdown">
                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -39,7 +51,7 @@
                 </button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="{{--{{route('patients.edit', $patient->id)}}--}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                  <a class="dropdown-item" href="{{--{{route('patients.destroy',$patient->id)}}--}}"><i class="bx bx-trash me-1"></i> Delete</a>
+                  <a class="dropdown-item" href="{{route('user.destroy',$user->id)}}"><i class="bx bx-trash me-1"></i> Delete</a>
                 </div>
               </div>
             </td>

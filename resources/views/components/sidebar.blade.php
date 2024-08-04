@@ -106,8 +106,8 @@
               </a>
             </li>
             <!-- Kelola Akun -->            
-            <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
+            <li class="menu-item {{ Route::currentRouteName() == 'user.edit' ? 'active' : '' }}">
+              <a href="{{route('user.edit', Auth::user()->id)}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="kelola akun">Kelola Akun</div>
               </a>

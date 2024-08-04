@@ -3,6 +3,17 @@
 @section('content')
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+    <a href="{{route('dashboard')}}">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+    <a href="{{route('drug')}}">Drug</a>
+    </li>
+    <li class="breadcrumb-item active">Edit</li>
+</ol>
+</nav>
 <div class="col-xxl">
     <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">

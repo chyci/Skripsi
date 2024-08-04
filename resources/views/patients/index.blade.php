@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{route('dashboard')}}">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">Patient</li>
+    </ol>
+  </nav>
 <div class="card">
   <div class="px-4 table-responsive text-nowrap">
   <div class="mb-2 d-flex justify-content-between align-items-center py-2">
@@ -28,7 +36,11 @@
             </td>
             <td>{{$patient->birth}}</td>
             <td>
-              {{$patient->sex}}
+              @if ($patient->sex == 'f')
+                  <span class="badge rounded-pill bg-label-success">Female</span>
+              @elseif ($patient->sex == 'm')
+                  <span class="badge rounded-pill bg-label-warning">Male</span>
+              @endif
             </td>
             <td>{{Str::limit($patient->address,25)}}</td>
             <td>{{$patient->phone}}</td>
