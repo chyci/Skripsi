@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\DrugEntryController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PatientHistoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use App\Models\Visit;
@@ -54,4 +55,8 @@ Route::prefix('visit')->group(function () {
 });
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.index');
+});
+Route::prefix('patienthistory')->group(function () {
+    Route::get('/', [PatientHistoryController::class, 'index'])->name('patienthistory.index');
+    Route::get('/show/{id}', [PatientHistoryController::class, 'show'])->name('patienthistory.show');
 });

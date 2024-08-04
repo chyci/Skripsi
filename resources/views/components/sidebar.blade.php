@@ -99,8 +99,8 @@
               </a>
             </li>
             <!-- riwayat pasien -->            
-            <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
+            <li class="menu-item {{ Route::currentRouteName() == 'patienthistory.index' ? 'active' : '' }}">
+              <a href="{{route('patienthistory.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="riwayat pasien">riwayat pasien</div>
               </a>
@@ -113,8 +113,8 @@
               </a>
             </li>
             <!-- User -->            
-            <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
+            <li class="menu-item {{Route::currentRouteName() == 'user.index' ? 'active' : ''}}">
+              <a href="{{route('user.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="user">User</div>
               </a>

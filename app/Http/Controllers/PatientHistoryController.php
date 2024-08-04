@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Drug;
+use App\Models\DrugOut;
+use App\Models\Patient;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PatientHistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::paginate(15);
-        return view('user.index', compact('users'));
+        $patients = Patient::paginate(15);
+        return view('patienthistory.index', compact('patients'));
     }
 
     /**
@@ -21,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // jangannn
     }
 
     /**
@@ -37,7 +40,16 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
+        $patients = Patient::get();
+        $drugs = Drug::get();
+        // $drugout = DrugOut::get();
+
+
+        $visit = Visit::where('patient_id', $id)->get();
+        $drugouts = DrugOut::where('visit_id', $id)->get();
+
+        return view('patienthistory.show', compact('drugouts', 'drugs', 'patients', 'visit'));
     }
 
     /**

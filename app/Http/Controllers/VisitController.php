@@ -44,6 +44,8 @@ class VisitController extends Controller
             'uric_acid' => 'required',
             'diagnose' => 'required',
             'date' => 'required',
+            'drug_id' => 'required',
+            'quantity' => 'required',
         ]);
 
         DB::beginTransaction();
