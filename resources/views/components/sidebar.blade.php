@@ -80,35 +80,35 @@
             <!-- Kunjungan -->            
             <li class="menu-item">
               <a href="{{route('visit.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bx-accessibility"></i>
                 <div data-i18n="Kunjungan">Kunjungan</div>
               </a>
             </li>
             <!-- Obat -->            
             <li class="menu-item {{Route::currentRouteName() == 'drug' ? 'active' : ''}}">
               <a href="{{route('drug')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bxs-capsule"></i>
                 <div data-i18n="Obat">Obat</div>
               </a>
             </li>
             <!-- Obat Masuk -->            
             <li class="menu-item {{ Route::currentRouteName() == 'drugentry' ? 'active' : '' }}">
               <a href="{{ route('drugentry') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bx-plus-medical"></i>
                 <div data-i18n="Obat Masuk">Obat Masuk</div>
               </a>
             </li>
             <!-- riwayat pasien -->            
             <li class="menu-item {{ Route::currentRouteName() == 'patienthistory.index' ? 'active' : '' }}">
               <a href="{{route('patienthistory.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bx-calendar-plus"></i>
                 <div data-i18n="riwayat pasien">riwayat pasien</div>
               </a>
             </li>
             <!-- Kelola Akun -->            
             <li class="menu-item {{ Route::currentRouteName() == 'user.edit' ? 'active' : '' }}">
               <a href="{{route('user.edit', Auth::user()->id)}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="kelola akun">Kelola Akun</div>
               </a>
             </li>
