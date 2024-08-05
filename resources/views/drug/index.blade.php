@@ -49,7 +49,8 @@
                 </button>
                 <div class="dropdown-menu">
               <a class="dropdown-item" href="{{route('drug.edit', $drug->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                  <a class="dropdown-item" href="{{route('drug.destroy',$drug->id)}}"><i class="bx bx-trash me-1"></i> Delete</a>
+                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-drugid="{{$drug->id}}"
+                  ><i class="bx bx-trash me-1"></i> Delete</a>
                 </div>
               </div>
             </td>
@@ -62,7 +63,30 @@
 
 </div>  
 <!-- / Content -->
-    
+<div class="modal fade" id="deleteModal" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+      <form class="modal-content" method="POST">
+          @csrf
+          @method('DELETE')
+          <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalTitle">Hapus Obat</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <h6 class="text-center text-bold">Apakah anda yakin ingin menghapus obat ini?</h6>
+              <h5 class="text-center text-bold">
+                {{$drug->name}}
+              </h5>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  Batal
+              </button>
+              <button type="submit" class="btn btn-danger">Hapus</button>
+          </div>
+      </form>
+  </div>
+</div>
 @endsection
 
 @push('js')
@@ -70,5 +94,13 @@
       $(document).ready( function () {
           $('#myTable').DataTable();
       } );
+
+      // delete modal
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('drugid')
+            var modal = $(this)
+            modal.find('form').attr('action', '/drug/destroy/' + id);
+        });
     </script>
 @endpush

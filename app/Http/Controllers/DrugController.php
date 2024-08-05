@@ -101,6 +101,6 @@ class DrugController extends Controller
     {
         $drug = Drug::find($id);
         $drug->delete();
-        return redirect('/drug');
+        return redirect()->back()->with('success', 'Obat berhasil dihapus.');
     }
 }

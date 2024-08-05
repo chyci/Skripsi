@@ -45,7 +45,6 @@
 
 </div>  
 <!-- / Content -->
-    
 @endsection
 
 

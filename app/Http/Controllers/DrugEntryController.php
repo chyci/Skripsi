@@ -91,6 +91,6 @@ class DrugEntryController extends Controller
     {
         $drugentry = DrugEntry::find($id);
         $drugentry->delete();
-        return redirect('/drugentry');
+        return redirect()->back()->with('success', 'Obat masuk berhasil dihapus.');
     }
 }

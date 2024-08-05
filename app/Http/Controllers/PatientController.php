@@ -96,6 +96,6 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
         $patient->delete();
-        return redirect('/patient');
+        return redirect()->back()->with('success', 'Pasien berhasil dihapus.');
     }
 }

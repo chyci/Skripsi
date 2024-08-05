@@ -7,7 +7,7 @@
         <a href="{{ route('dashboard')}}">Dashboard</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{ route('users')}}">User</a>
+        <a href="{{ route('user.index')}}">User</a>
     </li>
     <li class="breadcrumb-item active">Edit</li>
 </ol>
