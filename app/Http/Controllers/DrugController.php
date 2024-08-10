@@ -103,4 +103,7 @@ class DrugController extends Controller
         $drug->delete();
         return redirect()->back()->with('success', 'Obat berhasil dihapus.');
     }
+
+    
+
 }

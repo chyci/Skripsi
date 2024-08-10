@@ -152,4 +152,5 @@ class VisitController extends Controller
         $visit->delete();
         return redirect('/visit');
     }
+
 }

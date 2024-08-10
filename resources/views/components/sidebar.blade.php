@@ -105,6 +105,13 @@
                 <div data-i18n="riwayat pasien">riwayat pasien</div>
               </a>
             </li>
+            <!-- Forcasting -->            
+            <li class="menu-item {{ Route::currentRouteName() == 'forecasting.index' ? 'active' : '' }}">
+              <a href="{{route('forecasting.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar-plus"></i>
+                <div data-i18n="Forecasting">Forecasting</div>
+              </a>
+            </li>
             <!-- Kelola Akun -->            
             <li class="menu-item {{ Route::currentRouteName() == 'user.edit' ? 'active' : '' }}">
               <a href="{{route('user.edit', Auth::user()->id)}}" class="menu-link">

@@ -8,7 +8,7 @@
         <a href="{{ route('dashboard')}}">Dashboard</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{ route('patients')}}">Patient</a>
+        <a href="{{ route('patient')}}">Patient</a>
     </li>
     <li class="breadcrumb-item active">Create</li>
 </ol>
