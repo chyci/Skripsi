@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\DrugEntryController;
+use App\Http\Controllers\ForecastingController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientHistoryController;
 use App\Http\Controllers\UserController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\VisitController;
 use App\Http\Middleware\UserRole;
 use App\Models\Visit;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Foreach_;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,10 +61,13 @@ Route::prefix('user')->group(function () {
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/change-password/{id}', [UserController::class, 'changePassword'])->name('user.change-password');
     Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
     Route::put('/change-role/{id}', [UserController::class, 'changeRole'])->name('user.change-role')->middleware(UserRole::class);
 });
 Route::prefix('patienthistory')->group(function () {
     Route::get('/', [PatientHistoryController::class, 'index'])->name('patienthistory.index');
     Route::get('/show/{id}', [PatientHistoryController::class, 'show'])->name('patienthistory.show');
+});
+Route::prefix('forecasting')->group(function () {
+    Route::get('/', [ForecastingController::class, 'index'])->name('forecasting.index');
+    Route::get('/generate-forecast/{id}', [ForecastingController::class, 'generateForecast'])->name('forecasting.generateForecast');
 });
