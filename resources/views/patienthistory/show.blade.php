@@ -8,7 +8,7 @@
             <a href="{{ route('dashboard')}}">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ route('patienthistory')}}">Riwayat Pasien</a>
+            <a href="{{ route('patienthistory.index')}}">Riwayat Pasien</a>
         </li>
         <li class="breadcrumb-item active">{{$patients->first()->name}}</li>
     </ol>
