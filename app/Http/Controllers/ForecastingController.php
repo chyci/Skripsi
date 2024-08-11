@@ -89,7 +89,7 @@ class ForecastingController extends Controller
         $filename = $this->generateCsvForDrug($drugId);
 
         // Path to Python executable, script, and input CSV
-        $pythonPath = 'C:\Users\USER\AppData\Local\Microsoft\WindowsApps\python.exe'; 
+        $pythonPath = 'C:\Users\USER\myenv\Scripts\python.exe';
         $pythonScript = storage_path('app/scripts/forecasting.py');
         $inputCsv = storage_path('app/' . $filename);
 
