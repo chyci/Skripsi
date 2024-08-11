@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Drug;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -84,12 +85,11 @@ class ForecastingController extends Controller
 
     public function generateForecast($drugId)
     {
-        // putenv("PATH=" . getenv("PATH") . ";C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\Microsoft\WindowsApps");
         // Generate the CSV file
         $filename = $this->generateCsvForDrug($drugId);
 
         // Path to Python executable, script, and input CSV
-        $pythonPath = 'C:\Users\USER\myenv\Scripts\python.exe';
+        $pythonPath = 'C:\Users\USER\myenv\Scripts\python.exe'; // Adjust this path
         $pythonScript = storage_path('app/scripts/forecasting.py');
         $inputCsv = storage_path('app/' . $filename);
 
@@ -110,14 +110,53 @@ class ForecastingController extends Controller
             logger()->info('Python script output: ' . $output);
 
             $forecastFilename = 'forecast_results.csv';
-            // Handle the forecast results (e.g., return as response, save to storage, etc.)
-            return response()->download(storage_path('app/' . $forecastFilename));
+            $forecastResults = $this->parseForecastResults(storage_path('app/' . $forecastFilename));
+            // dd($forecastResults);
+            // Get drug information
+            $drug = Drug::findOrFail($drugId);
+            
+            return view('forecasting.results', compact('forecastResults', 'drug'));
         } catch (ProcessFailedException $exception) {
             // Handle errors
             logger()->error('Python script error: ' . $exception->getMessage());
             logger()->error('Python script error output: ' . $process->getErrorOutput());
             return response()->json(['error' => 'Forecasting failed: ' . $exception->getMessage()], 500);
         }
+    }
+
+    private function parseForecastResults($filepath)
+    {
+        $results = [];
+        $totalMape = 0;
+        $count = 0;
+
+        if (($handle = fopen($filepath, "r")) !== FALSE) {
+            // Read and discard the header row
+            fgetcsv($handle, 1000, ",");
+
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $mape = (float) $data[3];
+                $results[] = [
+                    'date' => $data[0],
+                    'actual_sales' => $data[1],
+                    'forecast' => $data[2],
+                    'pe' => $data[3],
+                    'mape' => $mape
+                    
+                ];
+
+                // Tambahkan MAPE ke total dan hitung jumlah data
+                $totalMape += $mape;
+                $count++;
+            }
+            fclose($handle);
+            // Hitung rata-rata MAPE
+            $averageMape = $count > 0 ? $totalMape / $count : 0;
+        }
+        return [
+            'results' => $results,
+            'averageMape' => $averageMape
+        ];
     }
 
     /**
