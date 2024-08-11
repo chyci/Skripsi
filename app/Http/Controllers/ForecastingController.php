@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Drug;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class ForecastingController extends Controller
 {
@@ -54,29 +56,70 @@ class ForecastingController extends Controller
         return $filename;
     }
 
+    // public function generateForecast($drugId)
+    // {
+    //     // Generate the CSV file
+    //     $filename = $this->generateCsvForDrug($drugId);
+
+    //     // Path to Python script
+    //     $pythonScript = storage_path('app/scripts/forecasting.py');
+    //     print_r($pythonScript);
+
+
+    //     $command = "python3 $pythonScript";
+    //     exec($command, $output, $return_var);
+    //     logger()->error('Python script output: ' . implode("\n", $output));
+    //     logger()->error('Return status: ' . $return_var);
+
+    //     if ($return_var === 0) {
+    //         // Forecasting successful
+    //         $forecastFilename = 'forecast_results.csv';
+    //         // Handle the forecast results (e.g., return as response, save to storage, etc.)
+    //         return response()->download(storage_path('app/' . $forecastFilename));
+    //     } else {
+    //         // Handle errors
+    //         return response()->json(['error' => 'Forecasting failed'], 500);
+    //     }
+    // }
+
     public function generateForecast($drugId)
     {
+        // putenv("PATH=" . getenv("PATH") . ";C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\Microsoft\WindowsApps");
         // Generate the CSV file
         $filename = $this->generateCsvForDrug($drugId);
 
-        // Path to Python script
-        $pythonScript = storage_path('app/forecasting.py');
+        // Path to Python executable, script, and input CSV
+        $pythonPath = 'python.exe';
+        $pythonScript = storage_path('app/scripts/forecasting.py');
+        $inputCsv = storage_path('app/' . $filename);
 
-        $command = "python3 $pythonScript";
-        exec($command, $output, $return_var);
-        logger()->error('Python script output: ' . implode("\n", $output));
-        logger()->error('Return status: ' . $return_var);
+        // Create a new Process
+        $process = new Process([
+            $pythonPath,
+            $pythonScript,
+            $inputCsv
+        ]);
 
-        if ($return_var === 0) {
+        $process->setWorkingDirectory(storage_path('app/scripts'));
+
+        try {
+            $process->mustRun();
+
             // Forecasting successful
+            $output = $process->getOutput();
+            logger()->info('Python script output: ' . $output);
+
             $forecastFilename = 'forecast_results.csv';
             // Handle the forecast results (e.g., return as response, save to storage, etc.)
             return response()->download(storage_path('app/' . $forecastFilename));
-        } else {
+        } catch (ProcessFailedException $exception) {
             // Handle errors
-            return response()->json(['error' => 'Forecasting failed'], 500);
+            logger()->error('Python script error: ' . $exception->getMessage());
+            logger()->error('Python script error output: ' . $process->getErrorOutput());
+            return response()->json(['error' => 'Forecasting failed: ' . $exception->getMessage()], 500);
         }
     }
+
     /**
      * Show the form for creating a new resource.
      */
