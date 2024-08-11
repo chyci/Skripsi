@@ -17,23 +17,7 @@ class DrugController extends Controller
     {
         
         $drugs = Drug::paginate(15);
-        // Dapatkan jumlah `drugentry` per `drug_id`
-        $drugentry = DrugEntry::select('drug_id', DB::raw('SUM(quantity) as total_entry'))
-        ->groupBy('drug_id')
-        ->pluck('total_entry', 'drug_id');
-
-        // Dapatkan jumlah `drugout` per `drug_id`
-        $drugout = DrugOut::select('drug_id', DB::raw('SUM(quantity) as total_out'))
-        ->groupBy('drug_id')
-        ->pluck('total_out', 'drug_id');
-
-        // Gabungkan data dan hitung jumlah bersih
-        $drugs = Drug::all()->map(function ($drug) use ($drugentry, $drugout) {
-            $drug->total_entry = $drugentry->get($drug->id, 0);
-            $drug->total_out = $drugout->get($drug->id, 0);
-            $drug->net_quantity = $drug->total_entry - $drug->total_out;
-            return $drug;
-        });
+        
         return view('drug.index', compact('drugs'));
     }
 

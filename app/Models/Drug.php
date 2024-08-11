@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Drug extends Model
 {
     use HasFactory;
-    protected $fillabel = ['name'];
+    protected $fillabel = ['name', 'stock'];
 
     /**
      * Get all of the comments for the drug

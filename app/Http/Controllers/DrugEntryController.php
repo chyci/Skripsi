@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Drug;
 use App\Models\DrugEntry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DrugEntryController extends Controller
 {
@@ -37,11 +38,18 @@ class DrugEntryController extends Controller
             'entry_date' => 'required',
         ]);
 
+        DB::beginTransaction();
         $drugentry = new DrugEntry();
         $drugentry->drug_id = $request->drug_id;
         $drugentry->quantity = $request->quantity;
         $drugentry->entry_date = $request->entry_date;
         $drugentry->save();
+
+        $drug = Drug::find($request->drug_id);
+        $drug->stock = $drug->stock + $validated['quantity'];
+        $drug->save();
+
+        DB::commit();
 
         return redirect('/drugentry');
     }

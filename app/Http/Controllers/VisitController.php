@@ -17,7 +17,7 @@ class VisitController extends Controller
      */
     public function index()
     {
-        $visit = Visit::with('patient')->paginate(15);
+        $visit = Visit::with('patient')->get();
         return view('visit.index', compact('visit'));
     }
 
@@ -27,7 +27,7 @@ class VisitController extends Controller
     public function create()
     {
         $patient = Patient::get();
-        $drugs = Drug::get();
+        $drugs = Drug::where('stock', '>', 0)->get();
         $drugout = DrugOut::get();
         return view('visit.create', compact('drugout', 'patient', 'drugs'));
     }
@@ -48,6 +48,13 @@ class VisitController extends Controller
             'quantity' => 'required',
         ]);
 
+        foreach ($request->drug_id as $index => $drug) {
+            $drug = Drug::find($drug);
+            if ($drug->stock < $request->quantity[$index]) {
+                return redirect()->back()->with('error', 'Stock obat ' . $drug->name . ' tidak cukup.');
+            }
+        }
+
         DB::beginTransaction();
 
         $visit = new Visit();
@@ -60,8 +67,12 @@ class VisitController extends Controller
         $visit->save();
 
         foreach ($request->drug_id as $index => $drug) {
+            $drug = Drug::find($drug);
+            $drug->stock = $drug->stock - $request->quantity[$index];
+            $drug->save();
+
             $drugout = new DrugOut();
-            $drugout->drug_id = $drug;
+            $drugout->drug_id = $request->drug_id[$index];
             $drugout->visit_id = $visit->id;
             $drugout->quantity = $request->quantity[$index];
             $drugout->save();

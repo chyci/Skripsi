@@ -40,7 +40,7 @@
               {{$drug->name}}
             </td>
             <td class="text-center">
-              {{ $drug->net_quantity }}
+              {{ $drug->stock }}
             </td>
             <td>
               <div class="dropdown">

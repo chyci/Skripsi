@@ -74,7 +74,7 @@
             <div class="modal-body">
                 <h6 class="text-center text-bold">Apakah anda yakin ingin menghapus obat masuk ini?</h6>
                 <h5 class="text-center text-bold text-danger">
-                    {{$drugentry->drug->name}}
+                    {{-- {{$drugentry->drug}} --}}
                 </h5>
             </div>
             <div class="modal-footer">
