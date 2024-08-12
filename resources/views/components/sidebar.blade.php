@@ -54,7 +54,7 @@
             <!-- Kunjungan -->            
             <li class="menu-item">
               <a href="{{route('visit.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-accessibility"></i>
+                <i class="menu-icon tf-icons bx bx-calendar-star"></i>
                 <div data-i18n="Kunjungan">Kunjungan</div>
               </a>
             </li>
@@ -82,7 +82,7 @@
             <!-- Forcasting -->            
             <li class="menu-item {{ Route::currentRouteName() == 'forecasting.index' ? 'active' : '' }}">
               <a href="{{route('forecasting.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-calendar-plus"></i>
+                <i class="menu-icon tf-icons bx bx-line-chart"></i>
                 <div data-i18n="Forecasting">Forecasting</div>
               </a>
             </li>

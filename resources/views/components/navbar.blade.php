@@ -11,14 +11,11 @@
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                    placeholder="Search..."
-                    aria-label="Search..." />
+              <div class="navbar-nav align-items-center ">
+                <div class="row nav-item d-flex align-self-center">
+                  <h6 class="fs-6 fw-bold mb-0 text-primary">Klinik Kesehatan Gratis Al-Muhajirin</h6>
+                  <p class="fs-10  mb-0">Banjarmasin, Kalimantan Selatan</p>
+                  
                 </div>
               </div>
               <!-- /Search -->
