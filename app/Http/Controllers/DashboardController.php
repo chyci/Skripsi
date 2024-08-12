@@ -19,9 +19,8 @@ class DashboardController extends Controller
         $patient->count();
         $visit->count();
         $drugs->count();
-        $drugout->count();
 
 
-        return view('dashboard', compact('drugout', 'drugs', 'patient'));
+        return view('dashboard', compact('patient', 'visit', 'drugs'));
     }
 }
