@@ -22,7 +22,7 @@
         <form action="{{route('patients.store')}}" method="POST">
             @csrf
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-default-name">Name</label>
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Nama</label>
             <div class="col-sm-10">
             <input type="text" id="basic-default-name" placeholder="John Doe" name="name"
                 class="form-control @error('name') invalid @enderror">
@@ -32,13 +32,13 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="html5-date-input" class="col-md-2 col-form-label">Birth</label>
+            <label for="html5-date-input" class="col-md-2 col-form-label">Tanggal Lahir</label>
             <div class="col-md-10">
                 <input class="form-control" type="date" value="2021-06-18" id="html5-date-input" name='birth'>
             </div>
         </div>
         <div class="row mb-3">
-        <label class="col-sm-2 col-form-label" for="sex" class="form-label">Sex</label>
+        <label class="col-sm-2 col-form-label" for="sex" class="form-label">Jenis Kelamin</label>
         <div class="col-sm-10">
         <select id="sex" class="form-select" name="sex">
             <option value="f">Female</option>
@@ -47,7 +47,7 @@
         </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-default-phone">Phone No</label>
+            <label class="col-sm-2 col-form-label" for="basic-default-phone">No Telp</label>
             <div class="col-sm-10">
             <input type="text" id="basic-default-phone" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-default-phone" name="phone"
                 class="form-control phone-mask @error('phone') invalid @enderror">
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-default-message">Message</label>
+            <label class="col-sm-2 col-form-label" for="basic-default-message">Alamat</label>
             <div class="col-sm-10">
             <textarea id="basic-default-message" placeholder="Hi, Do you have a moment to talk Joe?" aria-label="Hi, Do you have a moment to talk Joe?" aria-describedby="basic-icon-default-message2" name="address"
             class="form-control @error('address') invalid @enderror">

@@ -15,12 +15,15 @@ class DashboardController extends Controller
         $patient = Patient::get();
         $visit = Visit::get();
         $drugs = Drug::get();
+        $avl_drugs = Drug::where('stock', '>', 0)->get();
+        $recent_visit = Visit::orderBy('date', 'desc')->take(5)->get();
+        $recent_patient = Patient::orderBy('created_at', 'desc')->take(3)->get();
 
         $patient->count();
         $visit->count();
         $drugs->count();
-
-
-        return view('dashboard', compact('patient', 'visit', 'drugs'));
+        $avl_drugs->count();
+            
+        return view('dashboard', compact('patient', 'visit', 'drugs', 'avl_drugs', 'recent_visit', 'recent_patient'));
     }
 }

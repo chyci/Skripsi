@@ -14,7 +14,7 @@
             @csrf
             @method("PUT")
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-default-name">Name</label>
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Nama</label>
             <div class="col-sm-10">
             <input type="text" id="basic-default-name" value="{{$patient->name}}" name="name"
                 class="form-control @error('name') invalid @enderror">
@@ -24,13 +24,13 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="html5-date-input" class="col-md-2 col-form-label">Birth</label>
+            <label for="html5-date-input" class="col-md-2 col-form-label">Tanggal Lahir</label>
             <div class="col-md-10">
                 <input class="form-control" type="date" value="{{$patient->birth}}" id="html5-date-input" name='birth'>
             </div>
         </div>
         <div class="row mb-3">
-        <label class="col-sm-2 col-form-label" for="sex" class="form-label">Sex</label>
+        <label class="col-sm-2 col-form-label" for="sex" class="form-label">Jenis Kelamin</label>
         <div class="col-sm-10">
         <select id="sex" class="form-select" name="sex">
             <option @selected($patient->sex == 'f') value="f">Female</option>
@@ -39,7 +39,7 @@
         </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-default-phone">Phone No</label>
+            <label class="col-sm-2 col-form-label" for="basic-default-phone">No Telp</label>
             <div class="col-sm-10">
             <input type="text" id="basic-default-phone" value="{{$patient->phone}}" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-default-phone" name="phone"
                 class="form-control phone-mask @error('phone') invalid @enderror">
