@@ -15,7 +15,7 @@ class PatientHistoryController extends Controller
      */
     public function index()
     {
-        $patients = Patient::paginate(15);
+        $patients = Patient::get();
         return view('patienthistory.index', compact('patients'));
     }
 

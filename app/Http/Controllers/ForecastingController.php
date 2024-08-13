@@ -16,7 +16,7 @@ class ForecastingController extends Controller
      */
     public function index()
     {
-        $drugs = Drug::paginate(15);
+        $drugs = Drug::get();
         return view('forecasting.index', compact('drugs'));
     }
 

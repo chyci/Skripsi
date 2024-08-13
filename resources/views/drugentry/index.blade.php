@@ -48,7 +48,7 @@
                 </button>
                 <div class="dropdown-menu">
               <a class="dropdown-item" href="{{route('drugentry.edit', $drugentry->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-drugentryid="{{ $drugentry->id }}"
+                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-drugentryid="{{ $drugentry->id }} data-drugentryname="{{$drugentry->drug->name}}"
                   ><i class="bx bx-trash me-1"></i> Delete</a>
                 </div>
               </div>
@@ -73,7 +73,7 @@
             </div>
             <div class="modal-body">
                 <h6 class="text-center text-bold">Apakah anda yakin ingin menghapus obat masuk ini?</h6>
-                <h5 class="text-center text-bold text-danger">
+                <h5 class="text-center text-bold text-danger id="drugEntryName">
                     {{-- {{$drugentry->drug}} --}}
                 </h5>
             </div>
@@ -99,7 +99,9 @@
         $('#deleteModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('drugentryid')
+            var name = button.data('drugentryname')
             var modal = $(this)
+            modal.find('#drugEntryName').text(name)
             modal.find('form').attr('action', '/drugentry/destroy/' + id);
         });
     </script>

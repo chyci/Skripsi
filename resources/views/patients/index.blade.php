@@ -51,7 +51,7 @@
                 </button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="{{route('patients.edit', $patient->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-patientid="{{ $patient->id }}" 
+                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-patientid="{{$patient->id}}" data-patientname="{{$patient->name}}"
                   ><i class="bx bx-trash me-1"></i> Delete</a>
                 </div>
               </div>
@@ -76,8 +76,8 @@
             </div>
             <div class="modal-body">
                 <h6 class="text-center text-bold">Apakah anda yakin ingin menghapus pasien ini?</h6>
-                <h5 class="text-center text-bold text-danger">
-                    {{$patient->name}}
+                <h5 class="text-center text-bold text-danger" id="patientName">
+                    {{-- {{$patient->name}} --}}
                 </h5>
             </div>
             <div class="modal-footer">
@@ -102,7 +102,9 @@
         $('#deleteModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('patientid')
+            var name = button.data('patientname')
             var modal = $(this)
+            modal.find('#patientName').text(name)
             modal.find('form').attr('action', '/patient/destroy/' + id);
         });
     </script>

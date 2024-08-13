@@ -14,7 +14,7 @@ class DrugEntryController extends Controller
      */
     public function index()
     {
-        $drugentry = DrugEntry::with('drug')->paginate(15);
+        $drugentry = DrugEntry::with('drug')->get();
         return view('drugentry.index', compact('drugentry'));
     }
 
