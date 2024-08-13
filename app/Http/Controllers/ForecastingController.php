@@ -147,7 +147,9 @@ class ForecastingController extends Controller
 
                 // Tambahkan MAPE ke total dan hitung jumlah data
                 $totalMape += $mape;
-                $count++;
+                if ($data[3] > 0) {
+                    $count++;
+                }
             }
             fclose($handle);
             // Hitung rata-rata MAPE

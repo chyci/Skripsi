@@ -47,7 +47,7 @@
                     <tr>
                         <td class="text-center">{{ $result['date'] }}</td>
                         <td class="text-center">{{ $result['actual_sales'] }}</td>
-                        <td class="text-center">{{ number_format($result['forecast'],3) }}</td>
+                        <td class="text-center">{{ number_format($result['forecast'],1) }}</td>
                         <td class="text-center">{{ number_format((float)$result['pe'],3) }}</td>
                     </tr>
                     @endforeach
