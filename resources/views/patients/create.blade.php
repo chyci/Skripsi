@@ -59,13 +59,12 @@
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-default-message">Alamat</label>
             <div class="col-sm-10">
-            <textarea id="basic-default-message" placeholder="Hi, Do you have a moment to talk Joe?" aria-label="Hi, Do you have a moment to talk Joe?" aria-describedby="basic-icon-default-message2" name="address"
-            class="form-control @error('address') invalid @enderror">
-                @error('address')
-                <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </textarea>
+            <textarea id="basic-default-message" placeholder="Masukan alamat" aria-describedby="basic-icon-default-message2" name="address"
+            class="form-control @error('address') invalid @enderror"></textarea>
             </div>
+            @error('address')
+            <div class="form-text text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="row justify-content-end">
             <div class="col-sm-10">

@@ -33,15 +33,14 @@
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Nama Pasien</label>
                                 <div class="col-sm-10">
                                     <div class="position-relative" data-select2-id="18">
-                                        <select id="multicol-country" class="select2 form-select select2-hidden-accessible"
-                                            data-allow-clear="true" data-select2-id="multicol-country" tabindex="-1"
-                                            aria-hidden="true" name="patient_id">
-                                            <option value="" data-select2-id="2">Select</option>
+                                        <input class="form-control select2 form-select select2-hidden-accessible"
+                                             name="patient_id" placeholder="Nama Pasien" list="2">
+                                            <datalist id="2">
                                             @foreach ($patient as $patient)
                                                 <option value="{{ $patient->id }}" data-select2-id="2">{{ $patient->name }}
                                                 </option>
                                             @endforeach
-                                        </select>
+                                            </datalist>
                                     </div>
                                 </div>
                             </div>

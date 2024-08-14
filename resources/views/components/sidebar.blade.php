@@ -32,7 +32,7 @@
               </a>
             </li>
             <!-- Kunjungan -->            
-            <li class="menu-item">
+            <li class="menu-item {{Route::currentRouteName() == 'visit.index' ? 'active' : ''}}">
               <a href="{{route('visit.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-star"></i>
                 <div data-i18n="Kunjungan">Kunjungan</div>
