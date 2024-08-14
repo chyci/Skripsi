@@ -31,16 +31,15 @@
                         <div class="row mb-3">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Nama Pasien</label>
+                                <input type="hidden" name="patient_id" id="patient_id">
                                 <div class="col-sm-10">
                                     <div class="position-relative" data-select2-id="18">
-                                        <input class="form-control select2 form-select select2-hidden-accessible"
-                                             name="patient_id" placeholder="Nama Pasien" list="2">
-                                            <datalist id="2">
-                                            @foreach ($patient as $patient)
-                                                <option value="{{ $patient->id }}" data-select2-id="2">{{ $patient->name }}
-                                                </option>
+                                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Cari Pasien...">
+                                        <datalist id="datalistOptions">
+                                            @foreach ($patients as $patient)
+                                            <option value="{{ $patient->name }}" data-value="{{ $patient->id }}"></option>
                                             @endforeach
-                                            </datalist>
+                                        </datalist>
                                     </div>
                                 </div>
                             </div>
@@ -132,6 +131,7 @@
         <!-- / Content -->
     @endsection
 
+@section('js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var obatFields = document.getElementById('obat-fields');
@@ -169,4 +169,12 @@
                 }
             });
         });
+        
+        $('#exampleDataList').on('input', function(e) {
+            var shownVal = document.getElementById("exampleDataList").value;
+            var value2send = document.querySelector("#datalistOptions option[value='"+shownVal+"']").dataset.value;
+            $('#patient_id').val(value2send);
+        });
     </script>
+    
+@endsection

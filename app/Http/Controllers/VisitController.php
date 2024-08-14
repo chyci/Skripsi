@@ -26,10 +26,10 @@ class VisitController extends Controller
      */
     public function create()
     {
-        $patient = Patient::get();
+        $patients = Patient::get();
         $drugs = Drug::where('stock', '>', 0)->get();
         $drugout = DrugOut::get();
-        return view('visit.create', compact('drugout', 'patient', 'drugs'));
+        return view('visit.create', compact('drugout', 'patients', 'drugs'));
     }
 
     /**
